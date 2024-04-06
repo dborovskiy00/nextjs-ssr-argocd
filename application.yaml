@@ -11,7 +11,7 @@ spec:
   source:
     chart: nextjs-ssr-helm
     repoURL: https://dborovskiy00.github.io/nextjs-ssr-helm/
-    targetRevision: 4.0.5
+    targetRevision: 4.0.6
   syncPolicy:
     automated:
       prune: true
