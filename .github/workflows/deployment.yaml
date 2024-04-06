@@ -18,7 +18,7 @@ jobs:
 
       - name: Update version in YAML file
         run: |
-          sed -i "/^\( *- name: web\.image\)/!b;n;c\ \ \ \ \ \ \ \ \ \ value: dborovskiy00/nextjs:${{ github.event.client_payload.version }}" ./application.yaml
+          sed -i 's|targetRevision: .*|targetRevision: ${{ github.event.client_payload.version }}|g' application.yaml
 
       - name: Commit changes
         run: |
