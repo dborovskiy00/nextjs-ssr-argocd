@@ -32,3 +32,15 @@ jobs:
         run: |
           git tag -a ${{ github.event.client_payload.version }} -m "Version ${{ github.event.client_payload.version }}"
           git push origin ${{ github.event.client_payload.version }}
+
+      - name: Notify status to Slack
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          notification_title: "ArgoCD update Target Revision (${{ github.event.client_payload.version }})"
+          message_format: "{emoji} *{job}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked Repo <{repo_url}|{repo}>"
+          notify_when: ${{ job.status }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}	
